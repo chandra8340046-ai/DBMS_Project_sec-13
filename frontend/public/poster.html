@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technology Stack & Libraries Poster - EstateX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    :root {
+      --bg-cream: #faf7f2;
+      --card-bg: #ffffff;
+      --card-sub-bg: #f9f8f5;
+      --border-color: #ede7df;
+      --border-subtle: #f0ece5;
+      --text-dark: #1f242b;
+      --text-muted: #6e757e;
+      --text-subtle: #8c939d;
+      
+      --accent-coral: #d45b46;
+      --accent-coral-bg: #fdf2ef;
+      --accent-green: #377d5a;
+      --accent-green-bg: #eef7f2;
+      --accent-blue: #1b6fb5;
+      --accent-blue-bg: #eef5fc;
+      --accent-brown: #a8623b;
+      --accent-brown-bg: #fbf3ee;
+      --accent-purple: #2c3868;
+      --accent-purple-bg: #f2f3f9;
+
+      --leaf-color: #8c9b78;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: #e5e1d8;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+    }
+
+    /* Action Control Toolbar */
+    .toolbar {
+      background: #ffffff;
+      padding: 12px 24px;
+      border-radius: 50px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 20px;
+      z-index: 1000;
+    }
+
+    .toolbar button, .toolbar label {
+      border: none;
+      background: #f4f1ea;
+      color: #2b303a;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 13.5px;
+      padding: 9px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .toolbar button:hover {
+      background: #e7e2d6;
+      transform: translateY(-1px);
+    }
+
+    .toolbar button.btn-primary {
+      background: #1f6fb2;
+      color: #ffffff;
+    }
+    .toolbar button.btn-primary:hover {
+      background: #175a92;
+      box-shadow: 0 4px 12px rgba(27, 111, 178, 0.3);
+    }
+
+    .toolbar button.btn-download {
+      background: #377d5a;
+      color: #ffffff;
+    }
+    .toolbar button.btn-download:hover {
+      background: #2b6548;
+      box-shadow: 0 4px 12px rgba(55, 125, 90, 0.3);
+    }
+
+    .toolbar .badge-hint {
+      font-size: 12px;
+      color: #79808d;
+      margin-left: 8px;
+    }
+
+    /* Outer Canvas Box - Fixed 1600x1040 for exact proportion and print fidelity */
+    #poster-canvas {
+      width: 1560px;
+      min-width: 1560px;
+      height: 1020px;
+      background-color: var(--bg-cream);
+      background-image: radial-gradient(#ebe5dc 1px, transparent 1px);
+      background-size: 24px 24px;
+      border-radius: 16px;
+      padding: 26px 36px 20px 36px;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      border: 1px solid #e8e1d6;
+    }
+
+    /* Decorative Corner Foliage */
+    .botanical-corner {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.85;
+    }
+    .botanical-top-left {
+      top: 14px;
+      left: 18px;
+      width: 58px;
+    }
+    .botanical-top-right {
+      top: 14px;
+      right: 20px;
+      width: 65px;
+      transform: rotate(20deg);
+    }
+    .botanical-bottom-right {
+      bottom: 12px;
+      right: 22px;
+      width: 68px;
+      transform: rotate(-15deg);
+    }
+
+    /* Header Section */
+    .poster-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px 14px 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Left Brand Logo */
+    .brand-container {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 320px;
+    }
+    .brand-logo-icon {
+      width: 44px;
+      height: 44px;
+      color: #4a5d43;
+    }
+    .brand-texts {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #242b26;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      outline: none;
+    }
+    .brand-tagline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #8c7e6c;
+      text-transform: uppercase;
+      margin-top: 3px;
+      outline: none;
+    }
+
+    /* Center Main Title */
+    .header-center {
+      text-align: center;
+      flex-grow: 1;
+    }
+    .main-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: #1a2028;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      outline: none;
+    }
+    .main-subtitle {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #555e69;
+      margin-top: 4px;
+      outline: none;
+    }
+
+    /* Right Script Badge */
+    .header-right {
+      min-width: 320px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .badge-cursive {
+      background: #f2ece1;
+      border: 1px dashed #d6cbba;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      color: #634b3e;
+      font-weight: 700;
+      transform: rotate(-1.5deg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      outline: none;
+      white-space: nowrap;
+    }
+
+    /* Main Grid Layout */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex-grow: 1;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Top Row: Frontend, Backend, Databases */
+    .row-top {
+      display: grid;
+      grid-template-columns: 550px 450px 1fr;
+      gap: 14px;
+      height: 485px;
+    }
+
+    /* Bottom Row: Dev Tools, Other Libraries */
+    .row-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      height: 200px;
+    }
+
+    /* Section Card Containers */
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+      position: relative;
+    }
+
+    /* Section Header with Number Badge */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .section-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      flex-shrink: 0;
+    }
+    .section-badge svg {
+      width: 14px;
+      height: 14px;
+    }
+    .badge-coral { background: var(--accent-coral); }
+    .badge-green { background: var(--accent-green); }
+    .badge-blue { background: var(--accent-blue); }
+    .badge-brown { background: var(--accent-brown); }
+    .badge-purple { background: var(--accent-purple); }
+
+    .section-titles {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .section-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #1a2028;
+    }
+    .section-desc {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Technology Grid Items */
+    .tech-grid-frontend {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 7px;
+      flex-grow: 1;
+    }
+
+    .tech-grid-backend {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 7px;
+      flex-grow: 1;
+    }
+
+    .tech-grid-tools, .tech-grid-other {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      flex-grow: 1;
+    }
+
+    /* Individual Tech Card Tile */
+    .tech-tile {
+      background: var(--card-sub-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 9px;
+      padding: 6px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .tech-tile:hover {
+      border-color: #d8cebe;
+      background: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    }
+
+    .tech-logo-wrap {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+    .tech-logo-wrap svg, .tech-logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .tech-name {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #1a2028;
+      line-height: 1.15;
+    }
+    .tech-sub {
+      font-size: 9px;
+      color: #6d7580;
+      font-weight: 500;
+      line-height: 1.15;
+      margin-top: 2px;
+      padding: 0 2px;
+    }
+
+    /* Databases Section Specifics */
+    .db-container {
+      display: flex;
+      flex-direction: column;
+      height: calc(100% - 38px);
+      gap: 10px;
+    }
+    .db-top-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      flex-grow: 1;
+    }
+    .db-box {
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .db-logo-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .db-logo-img {
+      height: 38px;
+      width: auto;
+    }
+    .db-checklist {
+      list-style: none;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .db-checklist li {
+      font-size: 10.2px;
+      color: #333a44;
+      line-height: 1.25;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .db-checklist li .check-icon {
+      color: #2b7a4f;
+      font-weight: bold;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    /* "Why Both?" Callout Box */
+    .why-both-box {
+      background: #f7f9fd;
+      border: 1px solid #d9e3f1;
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+    .why-both-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .why-both-badge {
+      background: #1b6fb5;
+      color: #fff;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .why-both-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #172c47;
+    }
+    .why-both-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4.5px;
+    }
+    .why-both-list li {
+      font-size: 9.8px;
+      color: #364152;
+      line-height: 1.28;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .why-both-list li .check-icon {
+      color: #1b6fb5;
+      font-weight: bold;
+      font-size: 10.5px;
+      flex-shrink: 0;
+    }
+
+    /* Footer Section */
+    .poster-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 10px 0 10px;
+      border-top: 1px solid #e7ded4;
+      margin-top: 6px;
+      position: relative;
+      z-index: 2;
+    }
+    .footer-left {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #242b26;
+      outline: none;
+    }
+    .footer-divider {
+      color: #a89d8d;
+    }
+    .footer-academic {
+      font-size: 12px;
+      font-weight: 600;
+      color: #5d6672;
+      outline: none;
+    }
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-quote {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      font-weight: 600;
+      color: #3a4136;
+      outline: none;
+    }
+
+    /* Inline Content Editable Styling */
+    [contenteditable="true"] {
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    [contenteditable="true"]:hover {
+      background: rgba(220, 200, 160, 0.2);
+    }
+    [contenteditable="true"]:focus {
+      background: rgba(255, 255, 255, 0.9);
+      outline: 2px solid #1f6fb2;
+    }
+
+    /* Print Optimization Rules */
+    @media print {
+      body {
+        background: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      #poster-canvas {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        padding: 20px 24px !important;
+        page-break-inside: avoid;
+      }
+      @page {
+        size: landscape A3;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Action Toolbar -->
+  <div class="toolbar no-print">
+    <button class="btn-primary" onclick="window.print()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+      Print / Save as PDF
+    </button>
+    <button class="btn-download" id="download-png-btn" onclick="downloadPosterPNG()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      Download High-Res PNG
+    </button>
+    <button onclick="toggleProjectName()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+      Toggle EstateX ↔ Elysian Studio
+    </button>
+    <button onclick="toggleEditNotice()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Direct Edit Mode (Click any text to edit)
+    </button>
+    <span class="badge-hint">💡 Tip: You can directly click any title, student info, or roll number on the poster to customize it!</span>
+  </div>
+
+  <!-- Poster Main Canvas -->
+  <div id="poster-canvas">
+
+    <!-- Foliage Illustrations (SVGs) -->
+    <!-- Top Left Botanical -->
+    <svg class="botanical-corner botanical-top-left" viewBox="0 0 100 120" fill="none" stroke="var(--leaf-color)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 110 C 20 80, 50 40, 85 15" />
+      <path d="M30 85 C 10 75, 12 55, 30 65" fill="#8c9b78" fill-opacity="0.25" />
+      <path d="M48 62 C 65 50, 75 65, 55 75" fill="#8c9b78" fill-opacity="0.25" />
+      <path d="M68 38 C 50 25, 60 10, 75 25" fill="#8c9b78" fill-opacity="0.25" />
+      <path d="M85 15 C 95 10, 98 25, 85 30" fill="#8c9b78" fill-opacity="0.25" />
+    </svg>
+
+    <!-- Top Right Botanical -->
+    <svg class="botanical-corner botanical-top-right" viewBox="0 0 100 120" fill="none" stroke="var(--leaf-color)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M90 110 C 80 80, 50 40, 15 15" />
+      <path d="M70 85 C 90 75, 88 55, 70 65" fill="#8c9b78" fill-opacity="0.25" />
+      <path d="M52 62 C 35 50, 25 65, 45 75" fill="#8c9b78" fill-opacity="0.25" />
+      <path d="M32 38 C 50 25, 40 10, 25 25" fill="#8c9b78" fill-opacity="0.25" />
+      <path d="M15 15 C 5 10, 2 25, 15 30" fill="#8c9b78" fill-opacity="0.25" />
+    </svg>
+
+    <!-- Bottom Right Botanical -->
+    <svg class="botanical-corner botanical-bottom-right" viewBox="0 0 100 120" fill="none" stroke="var(--leaf-color)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 10 C 30 35, 60 70, 85 105" />
+      <path d="M35 30 C 20 45, 30 60, 45 50" fill="#8c9b78" fill-opacity="0.25" />
+      <path d="M55 58 C 75 50, 80 70, 65 78" fill="#8c9b78" fill-opacity="0.25" />
+      <path d="M72 82 C 60 95, 75 105, 85 92" fill="#8c9b78" fill-opacity="0.25" />
+    </svg>
+
+    <!-- Header -->
+    <header class="poster-header">
+      <div class="brand-container">
+        <!-- Botanical Logo Icon -->
+        <svg class="brand-logo-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+          <path d="M25 85 C 40 60, 60 30, 80 15" stroke="#52634b" stroke-width="4"/>
+          <path d="M38 65 C 22 55, 20 38, 38 48" fill="#52634b" fill-opacity="0.25"/>
+          <path d="M55 48 C 72 38, 76 54, 60 62" fill="#52634b" fill-opacity="0.25"/>
+          <path d="M68 28 C 55 14, 65 5, 76 18" fill="#52634b" fill-opacity="0.25"/>
+        </svg>
+        <div class="brand-texts">
+          <h1 class="brand-name" id="project-title" contenteditable="true">EstateX</h1>
+          <span class="brand-tagline" id="project-tagline" contenteditable="true">MODERN REAL ESTATE • SMARTER LIVING</span>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <h2 class="main-title" contenteditable="true">Technology Stack & Libraries</h2>
+        <p class="main-subtitle" id="project-subtitle" contenteditable="true">Tools and Technologies used (and planned) for EstateX</p>
+      </div>
+
+      <div class="header-right">
+        <div class="badge-cursive" id="header-badge-quote" contenteditable="true">
+          Crafted with Technology, for Real Estate & Communities.
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- TOP ROW: Frontend, Backend, Databases -->
+      <div class="row-top">
+
+        <!-- 1. FRONTEND (CLIENT SIDE) -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-badge badge-coral">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div class="section-titles">
+              <h3 class="section-title">1. Frontend (Client Side)</h3>
+              <p class="section-desc">Building a modern and responsive user interface</p>
+            </div>
+          </div>
+
+          <div class="tech-grid-frontend">
+            <!-- React.js -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="-11.5 -10.23174 23 20.46348">
+                  <circle cx="0" cy="0" r="2.05" fill="#00d8ff"/>
+                  <g stroke="#00d8ff" stroke-width="1" fill="none">
+                    <ellipse rx="11" ry="4.2"/>
+                    <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+                    <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="tech-name">React.js</div>
+              <div class="tech-sub">Frontend Framework</div>
+            </div>
+
+            <!-- JavaScript -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 64 64">
+                  <rect width="64" height="64" rx="8" fill="#F7DF1E"/>
+                  <path d="M19 46.5c1.5 1 3.5 1.7 5.7 1.7 4.2 0 6.6-2.2 6.6-6.4v-18h-5.4v17.8c0 2.2-1 3.4-3.2 3.4-1.2 0-2.4-.5-3-1l-.7 2.5zm19.5-.2c1.8 1 4.2 1.9 6.8 1.9 5.8 0 8.7-3 8.7-7.2 0-3.8-2.2-5.7-6.5-7.5-3-1.2-4.1-2.2-4.1-3.8 0-1.5 1.2-2.7 3.3-2.7 1.8 0 3.3.6 4.3 1.3l1.2-3.8c-1.3-.7-3.2-1.3-5.6-1.3-5.2 0-8.2 3-8.2 6.9 0 3.7 2.3 5.7 6.4 7.4 3.2 1.3 4.2 2.4 4.2 4 0 1.7-1.4 2.8-3.7 2.8-2.1 0-4-.8-5.3-1.7l-1.2 3.8z" fill="#000000"/>
+                </svg>
+              </div>
+              <div class="tech-name">JavaScript</div>
+              <div class="tech-sub">Programming Language</div>
+            </div>
+
+            <!-- HTML5 -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 512 512">
+                  <path fill="#E34F26" d="M71 460L30 0h452l-41 460-185 52"/>
+                  <path fill="#EF652A" d="M256 472l149-41 35-391H256"/>
+                  <path fill="#ECECEC" d="M256 176h-60l-4-49h64V78H128l12 147h116zm0 152l-80-21-5-59h-49l9 107 125 35"/>
+                  <path fill="#FFF" d="M256 176h60l-6 65h-54v49h50l-5 58-45 12v51l80-22 17-194 4-48H256zm0-98v49h128l-4-49"/>
+                </svg>
+              </div>
+              <div class="tech-name">HTML5</div>
+              <div class="tech-sub">Markup Language</div>
+            </div>
+
+            <!-- CSS3 -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 512 512">
+                  <path fill="#1572B6" d="M71 460L30 0h452l-41 460-185 52"/>
+                  <path fill="#33A9DC" d="M256 472l149-41 35-391H256"/>
+                  <path fill="#ECECEC" d="M256 176h-60l-4-49h64V78H128l12 147h116zm0 152l-80-21-5-59h-49l9 107 125 35"/>
+                  <path fill="#FFF" d="M256 176h60l-6 65h-54v49h50l-5 58-45 12v51l80-22 17-194 4-48H256zm0-98v49h128l-4-49"/>
+                </svg>
+              </div>
+              <div class="tech-name">CSS3</div>
+              <div class="tech-sub">Styling</div>
+            </div>
+
+            <!-- Tailwind CSS -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 24 24" fill="#06B6D4">
+                  <path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z"/>
+                </svg>
+              </div>
+              <div class="tech-name">Tailwind CSS</div>
+              <div class="tech-sub">UI Framework</div>
+            </div>
+
+            <!-- React Router -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="6" cy="6" r="3" fill="#F44250"/>
+                  <circle cx="18" cy="12" r="3" fill="#F44250"/>
+                  <circle cx="6" cy="18" r="3" fill="#F44250"/>
+                  <path d="M6 6L18 12L6 18" stroke="#F44250" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="tech-name">React Router</div>
+              <div class="tech-sub">Routing & Navigation</div>
+            </div>
+
+            <!-- TanStack Query -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 50 50">
+                  <rect width="50" height="50" rx="10" fill="#c69a7c"/>
+                  <text x="25" y="34" font-family="'Playfair Display', serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">R</text>
+                </svg>
+              </div>
+              <div class="tech-name">TanStack Query</div>
+              <div class="tech-sub">Data Fetching & Caching</div>
+            </div>
+
+            <!-- Zustand -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <!-- Zustand Bear -->
+                <svg viewBox="0 0 50 50">
+                  <circle cx="16" cy="16" r="6" fill="#634533"/>
+                  <circle cx="34" cy="16" r="6" fill="#634533"/>
+                  <circle cx="16" cy="16" r="3" fill="#f3d2bc"/>
+                  <circle cx="34" cy="16" r="3" fill="#f3d2bc"/>
+                  <circle cx="25" cy="27" r="14" fill="#634533"/>
+                  <ellipse cx="25" cy="30" rx="8" ry="6" fill="#f3d2bc"/>
+                  <circle cx="21" cy="24" r="2" fill="#000"/>
+                  <circle cx="29" cy="24" r="2" fill="#000"/>
+                  <ellipse cx="25" cy="28" rx="2.5" ry="1.8" fill="#2b1a10"/>
+                </svg>
+              </div>
+              <div class="tech-name">Zustand</div>
+              <div class="tech-sub">State Management</div>
+            </div>
+
+            <!-- React Hook Form -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <rect width="44" height="36" x="2" y="6" rx="8" fill="#EC5990"/>
+                  <path d="M12 24h14M12 16h22M12 32h10" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                  <circle cx="34" cy="30" r="5" fill="#fff"/>
+                  <path d="M32 30l1.5 1.5 3-3" stroke="#EC5990" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="tech-name">React Hook Form</div>
+              <div class="tech-sub">Form Handling & Validation</div>
+            </div>
+
+            <!-- Axios -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <polygon points="24,4 42,14 42,34 24,44 6,34 6,14" fill="#5A29E4"/>
+                  <text x="24" y="32" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="800" fill="#fff" text-anchor="middle">A</text>
+                </svg>
+              </div>
+              <div class="tech-name">Axios</div>
+              <div class="tech-sub">HTTP Client (for API calls)</div>
+            </div>
+
+            <!-- Framer Motion -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z" fill="url(#framerGrad)"/>
+                  <defs>
+                    <linearGradient id="framerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#0055FF"/>
+                      <stop offset="50%" stop-color="#AA00FF"/>
+                      <stop offset="100%" stop-color="#FF0055"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div class="tech-name">Framer Motion</div>
+              <div class="tech-sub">Animations</div>
+            </div>
+
+            <!-- Lucide React -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#F54E42" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10A10 10 0 0 1 2 12"/>
+                  <path d="M2 12a10 10 0 0 1 10-10"/>
+                  <path d="M12 2v20"/>
+                </svg>
+              </div>
+              <div class="tech-name">Lucide React</div>
+              <div class="tech-sub">Icons</div>
+            </div>
+
+            <!-- React Hot Toast -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <rect x="8" y="16" width="32" height="24" rx="6" fill="#F43F5E"/>
+                  <path d="M16 16v-4a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v4" fill="none" stroke="#F43F5E" stroke-width="3"/>
+                  <circle cx="18" cy="26" r="2.5" fill="#fff"/>
+                  <circle cx="30" cy="26" r="2.5" fill="#fff"/>
+                  <path d="M20 33c2 2 6 2 8 0" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="tech-name">React Hot Toast</div>
+              <div class="tech-sub">Notifications</div>
+            </div>
+
+            <!-- date-fns -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <rect x="6" y="10" width="36" height="32" rx="6" fill="#E11D48"/>
+                  <rect x="12" y="6" width="4" height="8" rx="2" fill="#BE123C"/>
+                  <rect x="32" y="6" width="4" height="8" rx="2" fill="#BE123C"/>
+                  <circle cx="16" cy="22" r="2" fill="#fff"/>
+                  <circle cx="24" cy="22" r="2" fill="#fff"/>
+                  <circle cx="32" cy="22" r="2" fill="#fff"/>
+                  <circle cx="16" cy="30" r="2" fill="#fff"/>
+                  <circle cx="24" cy="30" r="2" fill="#fff"/>
+                  <circle cx="32" cy="30" r="2" fill="#fff"/>
+                </svg>
+              </div>
+              <div class="tech-name">date-fns</div>
+              <div class="tech-sub">Date Utilities</div>
+            </div>
+
+            <!-- Vite -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 32 32">
+                  <path d="M29.5 5.5L16.8 30.6a1 1 0 0 1-1.8 0L2.5 5.5a1 1 0 0 1 1.2-1.4l12.4 4.3a1 1 0 0 0 .6 0l11.6-4.3a1 1 0 0 1 1.2 1.4z" fill="url(#viteA)"/>
+                  <path d="M21 2l-9.8 17.5 4.8-.4-3.5 8.9 12-14.8-5 .4z" fill="url(#viteB)"/>
+                  <defs>
+                    <linearGradient id="viteA" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#41D1FF"/>
+                      <stop offset="1" stop-color="#BD34FE"/>
+                    </linearGradient>
+                    <linearGradient id="viteB" x1="10" y1="2" x2="22" y2="28" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#FFEA83"/>
+                      <stop offset="1" stop-color="#FFDD35"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div class="tech-name">Vite</div>
+              <div class="tech-sub">Build Tool & Dev Server</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 2. BACKEND (SERVER SIDE) -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-badge badge-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 17h20M2 12h20M2 7h20"/></svg>
+            </div>
+            <div class="section-titles">
+              <h3 class="section-title">2. Backend (Server Side)</h3>
+              <p class="section-desc">Handling business logic, APIs and database operations</p>
+            </div>
+          </div>
+
+          <div class="tech-grid-backend">
+            <!-- Node.js -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <polygon points="24,4 44,14 44,34 24,44 4,34 4,14" fill="#339933"/>
+                  <text x="24" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">js</text>
+                </svg>
+              </div>
+              <div class="tech-name">Node.js</div>
+              <div class="tech-sub">Runtime Environment</div>
+            </div>
+
+            <!-- Express.js -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 54 36">
+                  <text x="27" y="24" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="700" fill="#333" text-anchor="middle" letter-spacing="-0.5">Express</text>
+                </svg>
+              </div>
+              <div class="tech-name">Express.js</div>
+              <div class="tech-sub">Web Framework</div>
+            </div>
+
+            <!-- jsonwebtoken -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <circle cx="24" cy="24" r="20" fill="#000"/>
+                  <circle cx="24" cy="24" r="14" fill="none" stroke="#D63AFF" stroke-width="3" stroke-dasharray="6,3"/>
+                  <circle cx="24" cy="24" r="7" fill="#00F9FF"/>
+                </svg>
+              </div>
+              <div class="tech-name">jsonwebtoken</div>
+              <div class="tech-sub">Authentication (JWT)</div>
+            </div>
+
+            <!-- bcrypt -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <path d="M24 4 L40 10 V22 C40 33 24 44 24 44 C24 44 8 33 8 22 V10 Z" fill="#2E7D32"/>
+                  <circle cx="24" cy="22" r="4" fill="#fff"/>
+                  <path d="M22 24h4v6h-4z" fill="#fff"/>
+                </svg>
+              </div>
+              <div class="tech-name">bcrypt</div>
+              <div class="tech-sub">Password Hashing</div>
+            </div>
+
+            <!-- Joi -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <circle cx="24" cy="24" r="18" fill="#582987"/>
+                  <text x="24" y="31" font-family="'Playfair Display', serif" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">Jo</text>
+                </svg>
+              </div>
+              <div class="tech-name">Joi</div>
+              <div class="tech-sub">Input Validation</div>
+            </div>
+
+            <!-- cors -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 54 36">
+                  <rect width="52" height="32" x="1" y="2" rx="6" fill="#0E4877"/>
+                  <text x="27" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-size="12.5" font-weight="800" fill="#fff" text-anchor="middle" letter-spacing="1">CORS</text>
+                </svg>
+              </div>
+              <div class="tech-name">cors</div>
+              <div class="tech-sub">Cross-Origin Sharing</div>
+            </div>
+
+            <!-- helmet -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <path d="M24 6 L40 12 V24 C40 34 24 42 24 42 C24 42 8 34 8 24 V12 Z" fill="#0F75D2"/>
+                  <path d="M14 22h20M24 16v14" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="tech-name">helmet</div>
+              <div class="tech-sub">Security Middleware</div>
+            </div>
+
+            <!-- morgan -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <rect x="8" y="8" width="32" height="32" rx="6" fill="#1C3D5A"/>
+                  <line x1="14" y1="16" x2="34" y2="16" stroke="#48BB78" stroke-width="2.5" stroke-linecap="round"/>
+                  <line x1="14" y1="24" x2="28" y2="24" stroke="#CBD5E0" stroke-width="2.5" stroke-linecap="round"/>
+                  <line x1="14" y1="32" x2="22" y2="32" stroke="#CBD5E0" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="tech-name">morgan</div>
+              <div class="tech-sub">HTTP Request Logging</div>
+            </div>
+
+            <!-- dotenv -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 54 36">
+                  <rect width="50" height="30" x="2" y="3" rx="7" fill="#025E2B"/>
+                  <text x="27" y="22" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="#E8F5E9" text-anchor="middle">.env</text>
+                </svg>
+              </div>
+              <div class="tech-name">dotenv</div>
+              <div class="tech-sub">Environment Config</div>
+            </div>
+
+            <!-- express-validator -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <circle cx="24" cy="24" r="18" fill="none" stroke="#22C55E" stroke-width="3"/>
+                  <path d="M16 24l5 5 11-11" stroke="#22C55E" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="tech-name">express-validator</div>
+              <div class="tech-sub">Data Validation</div>
+            </div>
+
+            <!-- multer -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <path d="M36 32a8 8 0 0 0 0-16 12 12 0 0 0-23.3 3.6A7 7 0 0 0 14 32h22z" fill="#2563EB"/>
+                  <path d="M24 24v10M20 28l4-4 4 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="tech-name">multer</div>
+              <div class="tech-sub">File Upload Handling</div>
+            </div>
+
+            <!-- nodemon -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <path d="M24 8a16 16 0 1 0 16 16A16 16 0 0 0 24 8z" fill="#76AC39"/>
+                  <circle cx="19" cy="22" r="3.5" fill="#1b3d0c"/>
+                  <circle cx="29" cy="22" r="3.5" fill="#1b3d0c"/>
+                  <path d="M20 30c2 2 6 2 8 0" stroke="#1b3d0c" stroke-width="2.5" stroke-linecap="round"/>
+                  <line x1="24" y1="8" x2="24" y2="3" stroke="#76AC39" stroke-width="3" stroke-linecap="round"/>
+                  <circle cx="24" cy="2" r="2" fill="#76AC39"/>
+                </svg>
+              </div>
+              <div class="tech-name">nodemon</div>
+              <div class="tech-sub">Development Restart</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 3. DATABASES -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-badge badge-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <div class="section-titles">
+              <h3 class="section-title">3. Databases</h3>
+              <p class="section-desc">Using and testing both relational and non-relational databases</p>
+            </div>
+          </div>
+
+          <div class="db-container">
+            <div class="db-top-comparison">
+              <!-- MySQL -->
+              <div class="db-box">
+                <div class="db-logo-head">
+                  <!-- MySQL Dolphin Logo SVG -->
+                  <svg class="db-logo-img" viewBox="0 0 160 50">
+                    <path d="M22 38 C 12 36, 6 28, 9 18 C 12 8, 26 6, 32 14 C 36 10, 42 12, 45 16 C 50 14, 54 18, 52 24 C 50 30, 44 32, 40 30 C 35 38, 26 40, 22 38 Z" fill="#00758F"/>
+                    <text x="62" y="32" font-family="'Plus Jakarta Sans', sans-serif" font-size="24" font-weight="800" fill="#00758F">MySQL</text>
+                  </svg>
+                </div>
+                <ul class="db-checklist">
+                  <li><span class="check-icon">✓</span> Relational Database</li>
+                  <li><span class="check-icon">✓</span> Structured Data</li>
+                  <li><span class="check-icon">✓</span> ACID Compliance</li>
+                  <li><span class="check-icon">✓</span> Best for core transactional data (users, orders, payments, etc.)</li>
+                  <li><span class="check-icon">✓</span> Managed using MySQL Workbench</li>
+                </ul>
+              </div>
+
+              <!-- MongoDB -->
+              <div class="db-box">
+                <div class="db-logo-head">
+                  <!-- MongoDB Leaf Logo SVG -->
+                  <svg class="db-logo-img" viewBox="0 0 170 50">
+                    <path d="M24 6 C 24 6, 12 18, 12 28 C 12 36, 18 42, 23 44 C 23.5 44.5, 24 45, 24 46 C 24 45, 24.5 44.5, 25 44 C 30 42, 36 36, 36 28 C 36 18, 24 6, 24 6 Z" fill="#47A248"/>
+                    <path d="M24 6 V 44 C 24.5 43.5, 28 41, 30 36 C 33 29, 29 18, 24 6 Z" fill="#3F9142"/>
+                    <text x="44" y="32" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" font-weight="800" fill="#13AA52">MongoDB</text>
+                  </svg>
+                </div>
+                <ul class="db-checklist">
+                  <li><span class="check-icon">✓</span> NoSQL Database</li>
+                  <li><span class="check-icon">✓</span> Flexible Schema</li>
+                  <li><span class="check-icon">✓</span> Good for unstructured or semi-structured data</li>
+                  <li><span class="check-icon">✓</span> Useful for property metadata, reviews, or rich media content</li>
+                  <li><span class="check-icon">✓</span> Managed using MongoDB Compass</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Why Both Box -->
+            <div class="why-both-box">
+              <div class="why-both-title-wrap">
+                <div class="why-both-badge">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                </div>
+                <span class="why-both-title">Why Both?</span>
+              </div>
+              <ul class="why-both-list">
+                <li><span class="check-icon">✓</span> We are using both MySQL and MongoDB to test and identify which database best suits our project requirements.</li>
+                <li><span class="check-icon">✓</span> Some data (e.g., users, transactions, enquiries) may be better stored in MySQL (relational), while other data (e.g., property listings, reviews, media) may be better stored in MongoDB (document-based).</li>
+                <li><span class="check-icon">✓</span> This helps us compare performance, flexibility, and scalability before finalizing the database for the project.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BOTTOM ROW: Development Tools, Other Useful Libraries -->
+      <div class="row-bottom">
+
+        <!-- 4. DEVELOPMENT TOOLS -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-badge badge-brown">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <div class="section-titles">
+              <h3 class="section-title">4. Development Tools</h3>
+              <p class="section-desc">Tools for development, testing and project management</p>
+            </div>
+          </div>
+
+          <div class="tech-grid-tools">
+            <!-- VS Code -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <path d="M36 4l-14 13-9-7-4 3 7 8-7 8 4 3 9-7 14 13c1.5 1.5 4 .5 4-1.8V5.8C40 3.5 37.5 2.5 36 4z" fill="#0065A9"/>
+                  <path d="M36 4L22 17l6 6 12-11.2V5.8C40 3.5 37.5 2.5 36 4z" fill="#007ACC"/>
+                  <path d="M36 44L22 31l6-6 12 11.2v6C40 44.5 37.5 45.5 36 44z" fill="#1F9CF0"/>
+                </svg>
+              </div>
+              <div class="tech-name">Visual Studio Code</div>
+              <div class="tech-sub">Code Editor</div>
+            </div>
+
+            <!-- Git -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <path d="M44.5 21.5l-18-18c-1.2-1.2-3.1-1.2-4.2 0l-18 18c-1.2 1.2-1.2 3.1 0 4.2l18 18c1.2 1.2 3.1 1.2 4.2 0l18-18c1.2-1.2 1.2-3.1 0-4.2z" fill="#F05032"/>
+                  <circle cx="24" cy="18" r="3.5" fill="#fff"/>
+                  <circle cx="17" cy="25" r="3.5" fill="#fff"/>
+                  <circle cx="31" cy="25" r="3.5" fill="#fff"/>
+                  <path d="M17 25l7-7m0 0v14" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="tech-name">Git</div>
+              <div class="tech-sub">Version Control</div>
+            </div>
+
+            <!-- GitHub -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48" fill="#181717">
+                  <path d="M24 4C12.95 4 4 12.95 4 24c0 8.84 5.73 16.34 13.67 18.99 1 .18 1.36-.43 1.36-.96 0-.47-.02-1.72-.03-3.37-5.56 1.21-6.74-2.68-6.74-2.68-.91-2.31-2.22-2.93-2.22-2.93-1.81-1.24.14-1.21.14-1.21 2 .14 3.06 2.06 3.06 2.06 1.78 3.05 4.67 2.17 5.81 1.66.18-1.29.7-2.17 1.27-2.67-4.44-.5-9.11-2.22-9.11-9.88 0-2.18.78-3.96 2.06-5.36-.21-.5-.89-2.54.2-5.29 0 0 1.68-.54 5.5 2.05a19.16 19.16 0 0 1 10 0c3.82-2.59 5.5-2.05 5.5-2.05 1.09 2.75.41 4.79.2 5.29 1.28 1.4 2.06 3.18 2.06 5.36 0 7.68-4.68 9.37-9.14 9.86.72.62 1.36 1.84 1.36 3.71 0 2.68-.02 4.84-.02 5.5 0 .54.36 1.16 1.38.96A20.02 20.02 0 0 0 44 24c0-11.05-8.95-20-20-20z"/>
+                </svg>
+              </div>
+              <div class="tech-name">GitHub</div>
+              <div class="tech-sub">Repository Hosting</div>
+            </div>
+
+            <!-- Postman -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <circle cx="24" cy="24" r="20" fill="#FF6C37"/>
+                  <path d="M12 28 C18 20, 30 18, 36 22 M36 22 L30 19 M36 22 L32 26" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  <circle cx="22" cy="18" r="3.5" fill="#fff"/>
+                </svg>
+              </div>
+              <div class="tech-name">Postman</div>
+              <div class="tech-sub">API Testing</div>
+            </div>
+
+            <!-- Figma -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <rect x="14" y="6" width="10" height="10" rx="5" fill="#F24E1E"/>
+                  <rect x="24" y="6" width="10" height="10" rx="5" fill="#FF7262"/>
+                  <rect x="14" y="16" width="10" height="10" rx="5" fill="#A259FF"/>
+                  <circle cx="29" cy="21" r="5" fill="#1ABCFE"/>
+                  <path d="M14 26 h10 v5 a5 5 0 0 1 -10 0 z" fill="#0ACF83"/>
+                </svg>
+              </div>
+              <div class="tech-name">Figma</div>
+              <div class="tech-sub">UI/UX Design</div>
+            </div>
+
+            <!-- Docker -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <path d="M44 22c-1.5 0-3 .5-4 1.5-.8-4.5-4.5-8-9-8.5v3c2.5.5 4.5 2.5 5 5-2 .5-3.5 2-4 4H4c0 7 6 12 16 12 12 0 18-5 21-12 1.5 0 3-.5 3-2.5 0-1.5-1-2.5-2.5-2.5z" fill="#2496ED"/>
+                  <rect x="10" y="17" width="4" height="4" fill="#2496ED"/>
+                  <rect x="16" y="17" width="4" height="4" fill="#2496ED"/>
+                  <rect x="22" y="17" width="4" height="4" fill="#2496ED"/>
+                  <rect x="16" y="11" width="4" height="4" fill="#2496ED"/>
+                  <rect x="22" y="11" width="4" height="4" fill="#2496ED"/>
+                </svg>
+              </div>
+              <div class="tech-name">Docker</div>
+              <div class="tech-sub">Containerization (Optional)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. OTHER USEFUL LIBRARIES -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-badge badge-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            </div>
+            <div class="section-titles">
+              <h3 class="section-title">5. Other Useful Libraries / Technologies</h3>
+              <p class="section-desc">Additional tools and libraries used in the project</p>
+            </div>
+          </div>
+
+          <div class="tech-grid-other">
+            <!-- Cloudinary -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <path d="M38 31a7 7 0 0 0 0-14 11 11 0 0 0-21.3 3.3A7 7 0 0 0 14 31h24z" fill="#3448C5"/>
+                  <path d="M21 25a4 4 0 0 1 8 0" stroke="#fff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                </svg>
+              </div>
+              <div class="tech-name">Cloudinary</div>
+              <div class="tech-sub">Image Storage (Media)</div>
+            </div>
+
+            <!-- React Slick -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <circle cx="10" cy="24" r="3.5" fill="#F43F5E"/>
+                  <circle cx="17" cy="24" r="3.5" fill="#F43F5E"/>
+                  <circle cx="24" cy="24" r="4.5" fill="#BE123C"/>
+                  <circle cx="31" cy="24" r="3.5" fill="#F43F5E"/>
+                  <circle cx="38" cy="24" r="3.5" fill="#F43F5E"/>
+                </svg>
+              </div>
+              <div class="tech-name">React Slick</div>
+              <div class="tech-sub">Carousel/Slider</div>
+            </div>
+
+            <!-- React DatePicker -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <rect x="8" y="10" width="32" height="30" rx="5" fill="#0284C7"/>
+                  <rect x="14" y="6" width="3" height="7" rx="1.5" fill="#0369A1"/>
+                  <rect x="31" y="6" width="3" height="7" rx="1.5" fill="#0369A1"/>
+                  <rect x="14" y="18" width="5" height="4" fill="#fff"/>
+                  <rect x="22" y="18" width="5" height="4" fill="#fff"/>
+                  <rect x="30" y="18" width="5" height="4" fill="#fff"/>
+                  <rect x="14" y="26" width="5" height="4" fill="#fff"/>
+                  <rect x="22" y="26" width="5" height="4" fill="#BAE6FD"/>
+                  <rect x="30" y="26" width="5" height="4" fill="#fff"/>
+                </svg>
+              </div>
+              <div class="tech-name">React DatePicker</div>
+              <div class="tech-sub">Date Picker</div>
+            </div>
+
+            <!-- Chart.js -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <rect x="10" y="24" width="6" height="16" rx="2" fill="#FF6384"/>
+                  <rect x="21" y="14" width="6" height="26" rx="2" fill="#36A2EB"/>
+                  <rect x="32" y="8" width="6" height="32" rx="2" fill="#FFCE56"/>
+                  <path d="M13 22 L24 12 L35 6" stroke="#4BC0C0" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                </svg>
+              </div>
+              <div class="tech-name">Chart.js</div>
+              <div class="tech-sub">Data Visualization</div>
+            </div>
+
+            <!-- ESLint -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <polygon points="24,6 40,15 40,33 24,42 8,33 8,15" fill="#4B32C3"/>
+                  <circle cx="24" cy="24" r="8" fill="#fff"/>
+                  <polygon points="24,18 28,26 20,26" fill="#4B32C3"/>
+                </svg>
+              </div>
+              <div class="tech-name">ESLint</div>
+              <div class="tech-sub">Code Linting</div>
+            </div>
+
+            <!-- Prettier -->
+            <div class="tech-tile">
+              <div class="tech-logo-wrap">
+                <svg viewBox="0 0 48 48">
+                  <rect x="10" y="10" width="28" height="6" rx="3" fill="#1A2B34"/>
+                  <rect x="10" y="18" width="20" height="5" rx="2.5" fill="#56B3B4"/>
+                  <rect x="10" y="25" width="24" height="5" rx="2.5" fill="#EA5E5E"/>
+                  <rect x="10" y="32" width="16" height="5" rx="2.5" fill="#BF85BF"/>
+                </svg>
+              </div>
+              <div class="tech-name">Prettier</div>
+              <div class="tech-sub">Code Formatting</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="poster-footer">
+      <div class="footer-left">
+        <span class="footer-brand" id="footer-brand" contenteditable="true">EstateX</span>
+        <span class="footer-divider">|</span>
+        <span class="footer-academic" contenteditable="true">B.Tech II Year – I Semester &nbsp;|&nbsp; Department of CS&IT</span>
+      </div>
+
+      <div class="footer-right">
+        <span class="footer-quote" id="footer-quote" contenteditable="true">— Technology empowers innovation.</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Toggle between EstateX and Elysian Studio branding
+    let currentTheme = 'estatex';
+
+    function toggleProjectName() {
+      const pTitle = document.getElementById('project-title');
+      const pTagline = document.getElementById('project-tagline');
+      const pSub = document.getElementById('project-subtitle');
+      const pBadge = document.getElementById('header-badge-quote');
+      const pFoot = document.getElementById('footer-brand');
+      const pQuote = document.getElementById('footer-quote');
+
+      if (currentTheme === 'estatex') {
+        currentTheme = 'elysian';
+        pTitle.innerText = 'Elysian Studio';
+        pTagline.innerText = 'HANDMADE STORIES • BRIGHTER TOMORROWS';
+        pSub.innerText = 'Tools and Technologies used (and planned) for Elysian Studio';
+        pBadge.innerText = 'Crafted with Technology, for Creators and Communities.';
+        pFoot.innerText = 'Elysian Studio';
+        pQuote.innerText = '— Technology empowers creativity.';
+      } else {
+        currentTheme = 'estatex';
+        pTitle.innerText = 'EstateX';
+        pTagline.innerText = 'MODERN REAL ESTATE • SMARTER LIVING';
+        pSub.innerText = 'Tools and Technologies used (and planned) for EstateX';
+        pBadge.innerText = 'Crafted with Technology, for Real Estate & Communities.';
+        pFoot.innerText = 'EstateX';
+        pQuote.innerText = '— Technology empowers innovation.';
+      }
+    }
+
+    function toggleEditNotice() {
+      alert("Direct Edit Mode is active! You can click anywhere on the poster text (e.g. Project Name, Student Details, Department, Roll No., Semester) and type directly. Then click 'Download High-Res PNG' or 'Print / Save as PDF'!");
+    }
+
+    // High resolution PNG download via html2canvas
+    function downloadPosterPNG() {
+      const btn = document.getElementById('download-png-btn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = "⏳ Generating 300 DPI PNG...";
+      btn.disabled = true;
+
+      const poster = document.getElementById('poster-canvas');
+
+      // Use scale: 2.5 for crystal-clear print resolution (approx 3900x2550 px)
+      html2canvas(poster, {
+        scale: 2.5,
+        useCORS: true,
+        backgroundColor: '#faf7f2',
+        logging: false
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = currentTheme === 'estatex' ? 'EstateX_Technology_Stack_Poster.png' : 'Elysian_Studio_Technology_Stack_Poster.png';
+        link.href = canvas.toDataURL('image/png', 1.0);
+        link.click();
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }).catch(err => {
+        console.error('Download error:', err);
+        alert('Rendering completed via canvas. If direct download did not trigger, you can use Print / Save as PDF!');
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      });
+    }
+  </script>
+</body>
+</html>

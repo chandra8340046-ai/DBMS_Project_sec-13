@@ -1,0 +1,14 @@
+{
+  "name": "estatex-root",
+  "version": "1.0.0",
+  "description": "EstateX Unified Full-Stack Real Estate Application",
+  "scripts": {
+    "start": "npm --prefix frontend run build && npm --prefix backend start",
+    "build": "npm --prefix frontend run build",
+    "backend": "cd backend && npm start",
+    "frontend": "cd frontend && npm run dev"
+  },
+  "keywords": ["real-estate", "estatex", "fullstack", "mongodb", "react"],
+  "author": "",
+  "license": "ISC"
+}
